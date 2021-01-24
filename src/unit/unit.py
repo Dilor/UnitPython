@@ -71,6 +71,7 @@ class Unit:
         self._hp = self._hp - damage_points
         if self._hp < 0:
             self._hp = 0
+            raise UnitIsDeadException()
 
     def addHitPoints(self, extra_hp) -> None:
         self.__ensure_is_alive()
@@ -92,10 +93,7 @@ class Unit:
 
     def counterAttack(self, enemy: Any) -> None:
         counter_dmg = self._dmg / 2
-        if counter_dmg >= enemy._hp:
-            enemy._hp = 0
-        else:
-            enemy._hp = enemy._hp - counter_dmg
+        enemy.takeDamage(counter_dmg)
 
 
 

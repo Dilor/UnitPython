@@ -17,10 +17,10 @@ def test_attack():
 
 
 def test_counter_attack_exception():
-    with pytest.raises(UnitIsDeadException):
         unit1 = Unit('SoLdIeR', 100, 100, 50)
         unit2 = Unit('SoLdIeR', 100, 100, 210)
-        unit1.attack(unit2)
+        with pytest.raises(ValueError):
+            unit1.attack(unit2)
 
 def test_unit_setters():
     unit1 = Unit('SoLdIeR', 100, 100, 10)
