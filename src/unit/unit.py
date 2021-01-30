@@ -1,5 +1,6 @@
 from typing import Any
 
+
 def prettify_string(value: str) -> str:
     if not isinstance(value, str):
         raise TypeError(f'value should be of type str: {value}')
@@ -60,13 +61,13 @@ class Unit:
         self._name = prettify_string(value)
 
     def __str__(self) -> str:
-        return f'{self.name}: ({self.hp}/{self.maxHP})'
+        return f'{self.name}: ({self.hp}/{self.maxHP}), dmg: {self.dmg}'
 
     def __ensure_is_alive(self):
         if self.hp == 0:
             raise UnitIsDeadException()
 
-    def takeDamage(self, damage_points) -> None:
+    def takeDamage(self, damage_points: int) -> None:
         self.__ensure_is_alive()
         self._hp = self._hp - damage_points
         if self._hp < 0:
@@ -76,25 +77,23 @@ class Unit:
     def addHitPoints(self, extra_hp) -> None:
         self.__ensure_is_alive()
         self._hp = self.hp + extra_hp
-        if self._hp > self._maxHP:
-            self._hp == self._maxHP
+        if self.hp > self.maxHP:
+            self.hp = self.maxHP
 
-    def __check_type(self, enemy: Any) -> None:
+    def check_type(self, enemy: Any) -> None:
         if not isinstance(enemy, self.__class__):
             raise TypeError(f'enemy param should be of type {self.__class__.__name__}')
 
-
     def attack(self, enemy: Any) -> None:
         self.__ensure_is_alive()
-        self.__check_type(enemy)
+        enemy.check_type(enemy)
         enemy.takeDamage(self._dmg)
-        enemy.__ensure_is_alive()
         enemy.counterAttack(self)
 
     def counterAttack(self, enemy: Any) -> None:
-        counter_dmg = self._dmg / 2
+        self.__ensure_is_alive()
+        counter_dmg = int(self._dmg / 2)
         enemy.takeDamage(counter_dmg)
-
 
 
 if __name__ == '__main__':  # pragma: no cover
@@ -110,4 +109,7 @@ if __name__ == '__main__':  # pragma: no cover
     unit2.attack(unit1)
     print(unit1)
     print(unit2)
-
+    x: str = None
+    y: str = '34'
+    print(x)
+    print(y)
