@@ -2,6 +2,7 @@ import pytest
 
 from paper.paper import check_numeric, Paper, OutOfSpace
 
+
 @pytest.mark.parametrize('actual, expected', [
     (100, 100),
     (100.0, 100),
@@ -40,10 +41,12 @@ def test_paper_setter():
     a5.max_symbols = 500
     assert a5.max_symbols == 500
 
+
 def test_unit_to_string():
     a5 = Paper(2000)
 
     assert str(a5) == 'Paper: max symbols - 2000, symbols - 0'
+
 
 def test_add_content():
     a4 = Paper(100)
@@ -52,5 +55,12 @@ def test_add_content():
     a4.add_content('text')
     assert a4.show() == print('text')
 
-    a5.add_content('it is very long text')
+    with pytest.raises(OutOfSpace):
+        a5.add_content('oh no! this text is so big')
     assert a5.show() == print('it is')
+
+
+def test_add_content_exception():
+    a6 = Paper(3)
+    with pytest.raises(OutOfSpace):
+        a6.add_content('text')

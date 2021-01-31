@@ -17,11 +17,14 @@ def check_numeric(value: int):
 class WrongCapacity(Exception):
     pass
 
+
 class NotReady(Exception):
     pass
 
+
 class OutOfRounds(Exception):
     pass
+
 
 class Gun:
     def __init__(self, capacity: int, model: str) -> None:
@@ -41,11 +44,11 @@ class Gun:
 
     @property
     def is_ready(self) -> bool:
-        return  self._is_ready
+        return self._is_ready
 
     @property
     def model(self) -> str:
-        return  self._model
+        return self._model
 
     @property
     def total_shots(self) -> int:
@@ -84,16 +87,14 @@ class Gun:
     def prepare(self) -> None:
         self.is_ready = not self.is_ready
 
-
     def reload(self):
         self.amount = self.capacity
-
 
     def shoot(self):
         if not self.is_ready:
             raise NotReady()
         if self.amount == 0:
-            raise OutOfRounds
+            raise OutOfRounds()
         print("Bang!")
         self.amount -= 1
         self.total_shots += 1

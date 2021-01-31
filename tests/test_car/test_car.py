@@ -19,19 +19,10 @@ def test_prettify_string(actual, expected):
 #     assert prettify_string('mazda') == 'Mazda'
 #     assert prettify_string('Mazda') == 'Mazda'
 
+
 def test_prettify_string_exception():
     with pytest.raises(TypeError):
         prettify_string(3)
-
-
-@pytest.mark.parametrize('value, exception_type', [
-    (-100, ValueError),
-    ('text', ValueError),
-    (dir, TypeError)
-])
-def test_prettify_string(value, exception_type):
-    with pytest.raises(exception_type):
-        check_numbers(value)
 
 
 @pytest.mark.parametrize('actual, expected', [
@@ -113,4 +104,3 @@ def test_car_setters():
     assert car1.model == 'Mazda'
     car1.model = 'Tesla'
     assert car1.model == 'Tesla'
-

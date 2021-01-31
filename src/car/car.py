@@ -13,7 +13,7 @@ def prettify_string(value: str) -> str:
 def check_numbers(value: int):
     value = int(value)
     if value < 0:
-        raise ValueError(f'value should be >= 0')
+        raise ValueError('value should be >= 0')
     return value
 
 
@@ -96,12 +96,6 @@ class Car:
         self.fuel_amount -= fuel_needed
 
 
-
-
-
-
-
-
 if __name__ == '__main__':  # pragma: no cover
     point = Point(4, 4)
     point2 = Point(6, 6)
@@ -112,6 +106,3 @@ if __name__ == '__main__':  # pragma: no cover
     print(car)
     car.drive(point2)
     print(car)
-
-
-

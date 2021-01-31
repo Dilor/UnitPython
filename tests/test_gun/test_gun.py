@@ -18,6 +18,7 @@ def test_prettify_string_exception():
     with pytest.raises(TypeError):
         prettify_string(10000)
 
+
 @pytest.mark.parametrize('actual, expected', [
     (100, 100),
     (100.0, 100),
@@ -43,7 +44,7 @@ def test_gun_constructor():
     assert beretta.model == 'Beretta'
     assert beretta.amount == 0
     assert beretta.capacity == 8
-    assert beretta.is_ready == False
+    assert not beretta.is_ready
     assert beretta.amount == 0
 
 
@@ -60,7 +61,7 @@ def test_gun_setters():
     assert beretta.capacity == 9
 
     beretta.is_ready = True
-    assert beretta.is_ready == True
+    assert beretta.is_ready
 
     beretta.amount = 3
     assert beretta.amount == 3
@@ -86,7 +87,7 @@ def test_prepare():
     kalash = Gun(100, 'kalash')
     kalash.prepare()
 
-    assert  kalash.is_ready == True
+    assert kalash.is_ready
 
 
 def test_reload():
@@ -102,15 +103,17 @@ def test_shoot():
     kalash.prepare()
     kalash.shoot()
 
-    assert kalash.is_ready == True
+    assert kalash.is_ready
     assert kalash.total_shots == 1
     assert kalash.amount == 99
+
 
 def test_shoot_not_ready_exception():
     kalash = Gun(100, 'kalash')
     kalash.reload()
     with pytest.raises(NotReady):
         kalash.shoot()
+
 
 def test_shoot_out_of_rounds_exception():
     kalash = Gun(1, 'kalash')
@@ -119,12 +122,3 @@ def test_shoot_out_of_rounds_exception():
     kalash.shoot()
     with pytest.raises(OutOfRounds):
         kalash.shoot()
-
-    # def shoot(self):
-    #     if not self.is_ready:
-    #         raise NotReady()
-    #     if self.amount == 0:
-    #         raise OutOfRounds
-    #     print("Bang!")
-    #     self.amount -= 1
-    #     self.total_shots += 1

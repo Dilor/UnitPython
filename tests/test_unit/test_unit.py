@@ -56,10 +56,11 @@ def test_unit_to_string():
 
 
 def test_counter_attack_exception():
-        unit1 = Unit('SoLdIeR', 100, 100, 50)
-        unit2 = Unit('SoLdIeR', 100, 100, 210)
-        with pytest.raises(UnitIsDeadException):
-            unit1.attack(unit2)
+    unit1 = Unit('SoLdIeR', 100, 100, 50)
+    unit2 = Unit('SoLdIeR', 100, 100, 210)
+    with pytest.raises(UnitIsDeadException):
+        unit1.attack(unit2)
+
 
 def test_unit_constructor():
     soldier = Unit('Soldier', 100, 100, 20)
@@ -68,6 +69,7 @@ def test_unit_constructor():
     assert soldier.hp == 100
     assert soldier.maxHP == 100
     assert soldier.dmg == 20
+
 
 def test_unit_setters():
     soldier = Unit('SoLdIeR', 100, 100, 20)
@@ -92,7 +94,7 @@ def test_unit_setters():
     assert soldier.dmg == 50
 
     soldier.name = 'Ivan'
-    assert  soldier.name == 'Ivan'
+    assert soldier.name == 'Ivan'
 
     # assert soldier.hp == 10
 
@@ -112,6 +114,7 @@ def test_prettify_string_exception():
     with pytest.raises(TypeError):
         prettify_string(10000)
 
+
 @pytest.mark.parametrize('actual, expected', [
     (100, 100),
     (100.0, 100),
@@ -130,6 +133,7 @@ def test_check_numeric_exception(value, exception_type):
     with pytest.raises(exception_type):
         check_numeric(value)
 
+
 @pytest.mark.parametrize('value2, exception_type2', [
     (-100, TypeError),
     ('error', TypeError),
@@ -140,6 +144,3 @@ def test__check_type_exception(value2, exception_type2):
 
     with pytest.raises(exception_type2):
         soldier.check_type(value2)
-
-if __name__ == '__main__':
-    print("-----------------")

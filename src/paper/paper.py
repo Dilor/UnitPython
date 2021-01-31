@@ -46,11 +46,13 @@ class Paper:
         total: int = len(value) + len(self.content)
         content_len: int = len(self.content)
 
-        if len(self.content) == self.max_symbols:
-            raise OutOfSpace()
-        if total > self.max_symbols:
+        # if len(self.content) == self.max_symbols:
+        #     raise OutOfSpace()
+        if total >= self.max_symbols:
+            # print(1)
             self.content += value[0:(self.max_symbols - content_len)]
             self.symbols = self.max_symbols
+            raise OutOfSpace()
         else:
             self.content += value
             self.symbols += len(value)
@@ -58,11 +60,13 @@ class Paper:
     def show(self) -> None:
         print(self.content)
 
-if __name__ == '__main__':  # pragma: no cover
-    a4 = Paper(2000)
-    print(a4)
-    a4.add_content('some')
-    print(a4)
-    a4.show()
-    a4.add_content('thing')
-    a4.show()
+# if __name__ == '__main__':  # pragma: no cover
+    # a4 = Paper(2000)
+    # print(a4)
+    # a4.add_content('some')
+    # print(a4)
+    # a4.show()
+    # a4.add_content('thing')
+    # a4.show()
+    # a6 = Paper(3)
+    # a6.add_content('test')
